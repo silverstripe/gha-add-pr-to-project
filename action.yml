@@ -7,6 +7,7 @@ runs:
 
     - name: Check if should be added
       id: check-if-should-add
+      shell: bash
       env:
         PR_AUTHOR: ${{ github.event.pull_request.user.login }}
         IS_DRAFT: ${{ github.event.pull_request.draft }}
