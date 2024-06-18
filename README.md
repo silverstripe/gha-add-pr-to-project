@@ -24,6 +24,9 @@ jobs:
     steps:
       - name: Add PR to github project
         uses: silverstripe/add-pr-to-project@v1
+        with:
+          app_id: ${{ vars.MY_APP_ID }}
+          private_key: ${{ secrets.MY_PRIVATE_KEY }}
 ```
 
 This action has no inputs.
