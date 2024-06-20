@@ -6,7 +6,7 @@ Add community-created pull requests to the [Community Contributions project](htt
 
 **.github/workflows/add-pr-to-project.yml**
 ```yml
-name: Add new pull requests to a github project
+name: Add new PRs to github project
 
 on:
   pull_request:
@@ -18,12 +18,16 @@ permissions: {}
 
 jobs:
   addprtoproject:
+    name: Add PR to GitHub Project
     # Only run on the silverstripe account
     if: github.repository_owner == 'silverstripe'
     runs-on: ubuntu-latest
     steps:
       - name: Add PR to github project
         uses: silverstripe/add-pr-to-project@v1
+        with:
+          app_id: ${{ vars.MY_APP_ID }}
+          private_key: ${{ secrets.MY_PRIVATE_KEY }}
 ```
 
 This action has no inputs.

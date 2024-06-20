@@ -1,12 +1,21 @@
 name: Add pull request to project
 description: GitHub Action to add new pull requests to the Community Contributions GitHub project
 
+inputs:
+  app_id:
+    description: 'The ID for a GitHub App, used to generate a token'
+    required: true
+  private_key:
+    description: 'The private key for a GitHub App, used to generate a token'
+    required: true
+
 runs:
   using: composite
   steps:
 
     - name: Check if should be added
       id: check-if-should-add
+      shell: bash
       env:
         PR_AUTHOR: ${{ github.event.pull_request.user.login }}
         IS_DRAFT: ${{ github.event.pull_request.draft }}
@@ -32,8 +41,8 @@ runs:
       if: steps.check-if-should-add.outputs.should_add_to_project == 'true' && github.repository_owner == 'silverstripe'
       uses: actions/create-github-app-token@v1
       with:
-        app-id: ${{ vars.PROJECT_PERMISSIONS_APP_ID }}
-        private-key: ${{ secrets.PROJECT_PERMISSIONS_APP_PRIVATE_KEY }}
+        app-id: ${{ inputs.app_id }}
+        private-key: ${{ inputs.private_key }}
   
     - name: Add to project
       if: steps.check-if-should-add.outputs.should_add_to_project == 'true'
