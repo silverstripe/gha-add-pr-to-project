@@ -27,7 +27,7 @@ runs:
         fi
         # We don't want CMS Squad member PRs to clutter the project board
         echo "Author is $PR_AUTHOR"
-        for squad_member in 'GuySartorelli' 'emteknetnz' 'maxime-rainville'; do
+        for squad_member in 'GuySartorelli' 'emteknetnz'; do
           if [[ $PR_AUTHOR == $squad_member ]]; then
             echo "Author is in CMS Squad. Skipping."
             echo "should_add_to_project=false" >> $GITHUB_OUTPUT
